@@ -38,4 +38,40 @@ public class DiceRoll {
 		return d1 + d2 + d3 + d4 + d5;
 	}
 	
+	public boolean isOfAKind(int amount) {
+		for (int i = 1; i <= 6; i++) {
+			if(count(i) >= amount) return true;
+		}
+		return false;
+	}
+	
+	public boolean isFullHouse() {
+		for (int i = 1; i <= 6; i++) {
+			if (count(i) == 3) {
+				for (int j = 1; j <= 6; j++) {
+					if (i != j && count(j) == 2) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean isStraight(int amount) {
+		int shifts = 6 - amount;
+		for (int shift = 0; shift < shifts; shift++) {
+			boolean isSequence = true;
+			for (int check = 1; check <= amount; check++) {
+				int count = count(check + shift);
+				if(count == 0 || count > shift) {
+					isSequence = false;
+					break;
+				}
+			}
+			if (isSequence) return isSequence;
+		}
+		return false;
+	}
+	
 }

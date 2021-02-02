@@ -1,7 +1,6 @@
 package com.kabryxis.yahtzee.scoring;
 
 import com.kabryxis.yahtzee.DiceRoll;
-import com.kabryxis.yahtzee.YahtzeeUtil;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -14,11 +13,11 @@ public enum Category {
 	FOURS(roll -> roll.count(4) > 1, roll -> roll.count(4) * 4),
 	FIVES(roll -> roll.count(5) > 1, roll -> roll.count(5) * 5),
 	SIXES(roll -> roll.count(6) > 1, roll -> roll.count(6) * 6),
-	THREE_OF_A_KIND(roll -> YahtzeeUtil.isOfAKind(roll, 3)),
-	FOUR_OF_A_KIND(roll -> YahtzeeUtil.isOfAKind(roll, 4)),
-	FULL_HOUSE(YahtzeeUtil::isFullHouse, roll -> 25),
-	SMALL_STRAIGHT(roll -> YahtzeeUtil.isStraight(roll, 4), roll -> 30),
-	LARGE_STRAIGHT(roll -> YahtzeeUtil.isStraight(roll, 5), roll -> 40),
+	THREE_OF_A_KIND(roll -> roll.isOfAKind(3)),
+	FOUR_OF_A_KIND(roll -> roll.isOfAKind(4)),
+	FULL_HOUSE(DiceRoll::isFullHouse, roll -> 25),
+	SMALL_STRAIGHT(roll -> roll.isStraight(4), roll -> 30),
+	LARGE_STRAIGHT(roll -> roll.isStraight(5), roll -> 40),
 	YAHTZEE(DiceRoll::isYahtzee, roll -> 50),
 	CHANCE(roll -> true);
 	
